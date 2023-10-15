@@ -40,25 +40,38 @@ struct HomeView: View {
                         }
                         .offset(y: 100)
                         
-                        
-                        ScrollView(.horizontal, showsIndicators: false){
-                            HStack{
-                                ForEach(0..<15){ i in
-                                    Text("\(15+i)")
-                                        .foregroundColor(i == 7 ? .white : .black)
-                                        .padding()
-                                        .background{
-                                            Circle()
-                                                .foregroundColor(i == 7 ? .pink : .black)
-                                                .opacity(i == 7 ? 0.5 : 0.1)
+                        ZStack{
+                            ScrollViewReader { scrollProxy in
+                                ScrollView(.horizontal, showsIndicators: false){
+                                    HStack{
+                                        ForEach(homeVM.datesArray,id:\.self){ date in
+                                            VStack{
+                                                Text(date.getDay)
+                                                Text(date.getMonth)
+                                            }
+                                            .id(date.description)
+                                            .padding()
+                                            .background{
+                                                Circle().opacity(0.1)
+                                                    .foregroundColor(homeVM.currentDate.formatted(date: .numeric, time: .omitted) == date.formatted(date: .numeric, time: .omitted) ? .pink : .black)
+                                            }
                                         }
+                                    }
+                                }
+                                .frame(height: 100)
+                                .onAppear{
+                                    scrollProxy.scrollTo(homeVM.currentDate)
                                 }
                             }
                         }
-                        .frame(height: 100)
                     }
                 }
             }
+            .alert(homeVM.alert.title, isPresented: $homeVM.showAlert, actions: {
+//                homeVM.alert.action()
+            }, message: {
+                Text(homeVM.alert.description)
+            })
             .task{
                 await self.homeVM.getDailyZenCard()
             }
@@ -80,7 +93,7 @@ struct HomeView: View {
                     .disabled(self.homeVM.isPrevButtonDisabled)
                     .tint(.pink)
                 }
-                
+
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                         Task{

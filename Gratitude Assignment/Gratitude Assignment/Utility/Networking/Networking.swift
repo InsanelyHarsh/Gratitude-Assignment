@@ -41,8 +41,7 @@ public final class NetworkingService{
     public init(){
         
     }
-
-
+    
     public func getJSON<T:Decodable>(url urlString:String,type:T.Type,authToken:String="")async throws -> T{
 
         let data = try await downloadDataFrom(url: urlString, authToken: authToken)
@@ -73,12 +72,7 @@ public final class NetworkingService{
         
         return data
     }
-}
-
-
-
-
-extension NetworkingService{
+    
     
     private func makeRequest(url urlString:String)throws ->URLRequest {
         guard let url = URL(string: urlString)

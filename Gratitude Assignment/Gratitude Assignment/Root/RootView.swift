@@ -24,11 +24,6 @@ struct RootView: View {
                         .foregroundColor(.red)
                     
                     HStack{
-                        Button {
-                            self.rootVM.checkConnection()
-                        } label: {
-                            Text("Try Again!")
-                        }.buttonStyle(.borderedProminent)
                         
                         Button {
                             //TODO: Present data from core-data
@@ -37,11 +32,17 @@ struct RootView: View {
                         }
                         .buttonStyle(.borderedProminent)
                         .tint(.orange)
+                        
+                        Button {
+                            self.rootVM.checkConnection()
+                        } label: {
+                            Text("Try Again!")
+                        }.buttonStyle(.borderedProminent)
                     }
                 }
             }
         }.onAppear{
-//            self.rootVM.checkConnection()
+            self.rootVM.checkConnection()
         }
     }
 }

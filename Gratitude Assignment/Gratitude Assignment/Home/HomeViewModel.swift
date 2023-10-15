@@ -8,7 +8,6 @@
 import Foundation
 import SwiftUI
 
-
 class HomeViewModel:ObservableObject{
     @Published var zenCards:[CardModel] = []
     
@@ -16,35 +15,50 @@ class HomeViewModel:ObservableObject{
     @Published var isPrevButtonDisabled:Bool = false
     @Published var isNextButtonDisabled:Bool = true
     
-    private var currentDate = Date.now
+    @Published var datesArray:[Date] = []
+    
+    @Published var showAlert:Bool = false
+    @Published var alert:AlertModel = AlertModel() //Default Alert
+    
+    @Published var currentDate = Date.now
     private let dailyZenService:DailyZenService
     
     public init(dailyZenService: DailyZenService = DailyZenService()) {
         self.dailyZenService = dailyZenService
+        
+        generateDates()
     }
     
     public func getDailyZenCard() async{
+        
         await MainActor.run{
             withAnimation {
                 self.isLoading = true
             }
         }
-        let response = try! await self.dailyZenService.getCards(forDate: currentDate)
         
-        await MainActor.run{
-            self.zenCards = response.map{CardModel(uniqueID: $0.uniqueID,
-                                                   title: $0.themeTitle,
-                                                   auther: $0.author,
-                                                   text: $0.text,
-                                                   imageURL: $0.dzImageURL,
-                                                   primayCTAText: $0.primaryCTAText,
-                                                   sharePrefix: $0.sharePrefix
-                                                   )}
-            
-//            CacheManager.instance.add(key: currentDate.description, value: <#T##UIImage#>)
-            
-            withAnimation {
-                self.isLoading = false
+        do{
+            let response = try await self.dailyZenService.getCards(forDate: currentDate)
+            await MainActor.run{
+                self.zenCards = response
+                withAnimation {
+                    self.isLoading = false
+                }
+            }
+        }catch(let error){
+            let networkingError = error as? NetworkingError
+            if(networkingError != nil){
+                presentAlert(alertTitle: networkingError!.alertTitle, alertMessage: networkingError!.alertDescription){
+                    Task{
+                        await self.getDailyZenCard()
+                    }
+                }
+            }else{
+                presentAlert(alertTitle: "Fetching Zen Cards Failed", alertMessage: error.localizedDescription){ [weak self] in
+                    Task{ [weak self] in
+                        await self?.getDailyZenCard()
+                    }
+                }
             }
         }
     }
@@ -53,7 +67,7 @@ class HomeViewModel:ObservableObject{
         let date = Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!
 
         if(await isValidDate(date)){
-            self.currentDate = date
+            await MainActor.run{ self.currentDate = date }
         }
         
         await self.getDailyZenCard()
@@ -63,14 +77,18 @@ class HomeViewModel:ObservableObject{
         let date = Calendar.current.date(byAdding: .day, value: -1, to: currentDate)!
         
         if(await isValidDate(date)){
-            self.currentDate = date
+            await MainActor.run{ self.currentDate = date }
         }
         
         await self.getDailyZenCard()
     }
     
     
-//    public func get
+    private func presentAlert(alertTitle title:String, alertMessage description:String,_ action:@escaping ()->() = { }){
+        self.isLoading = false
+        self.alert = AlertModel(title: title, description: description,alertAction: action)
+        self.showAlert = true
+    }
 }
 
 extension HomeViewModel{
@@ -102,5 +120,33 @@ extension HomeViewModel{
         let days = calendar.dateComponents([.day], from: startOfDay, to: endOfDay).day!
         
         return days
+    }
+    
+    private func generateDates(){
+        let today = Date()
+        let calendar = Calendar.current
+        
+        var datesArray: [Date] = []
+        
+        for dateOffset in -6...7{
+            if let date = calendar.date(byAdding: .day, value: dateOffset, to: today) {
+                datesArray.append(date)
+            }
+        }
+        self.datesArray = datesArray
+    }
+}
+
+extension Date{
+    var getDay:String{
+        let formatter = DateFormatter()
+        formatter.dateFormat = "d"
+        return formatter.string(from: self)
+    }
+    
+    var getMonth:String{
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM"
+        return formatter.string(from: self)
     }
 }

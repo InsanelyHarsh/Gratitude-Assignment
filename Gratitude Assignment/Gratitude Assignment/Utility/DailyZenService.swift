@@ -16,12 +16,22 @@ struct DailyZenService{
         self.networkingService = networkingService
     }
     
-    func getCards(forDate date:Date) async throws->[DailyZenModel]{
+    func getCards(forDate date:Date) async throws->[CardModel]{
         
         let dateString = convert(date: date) //Date --> "20230915"
         
         let url = "https://m67m0xe4oj.execute-api.us-east-1.amazonaws.com/prod/dailyzen/?date=\(dateString)&version=2"
-        return try await self.networkingService.getJSON(url: url, type: [DailyZenModel].self)
+        let result = try await self.networkingService.getJSON(url: url, type: [DailyZenModel].self)
+        
+        return result.map{
+            CardModel(uniqueID: $0.uniqueID,
+                      title: $0.themeTitle,
+                      auther: $0.author,
+                      text: $0.text,
+                      imageURL: $0.dzImageURL,
+                      primayCTAText: $0.primaryCTAText,
+                      sharePrefix: $0.sharePrefix)
+        }
     }
 
     func getImageFrom(url:String)async -> UIImage?{

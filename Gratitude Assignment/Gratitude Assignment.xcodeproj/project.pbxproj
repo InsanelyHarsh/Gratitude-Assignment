@@ -13,6 +13,9 @@
 		B032EF022ADBFEBA00A675D1 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = B032EF012ADBFEBA00A675D1 /* Reachability.swift */; };
 		B032EF072ADBFF5700A675D1 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B032EF062ADBFF5700A675D1 /* RootView.swift */; };
 		B032EF092ADBFF6900A675D1 /* RootViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B032EF082ADBFF6900A675D1 /* RootViewModel.swift */; };
+		B032EF0D2ADC290200A675D1 /* NetworkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B032EF0C2ADC290200A675D1 /* NetworkingTests.swift */; };
+		B032EF152ADC3B6B00A675D1 /* AlertHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B032EF142ADC3B6B00A675D1 /* AlertHandler.swift */; };
+		B032EF1A2ADC3E0800A675D1 /* FailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B032EF192ADC3E0800A675D1 /* FailedView.swift */; };
 		B036DC072AD9896A00F13A73 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = B036DC062AD9896A00F13A73 /* Networking.swift */; };
 		B036DC0F2AD989A200F13A73 /* NetworkingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B036DC0E2AD989A200F13A73 /* NetworkingError.swift */; };
 		B036DC122AD989BC00F13A73 /* CustomAlertProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B036DC112AD989BC00F13A73 /* CustomAlertProtocol.swift */; };
@@ -56,6 +59,9 @@
 		B032EF012ADBFEBA00A675D1 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		B032EF062ADBFF5700A675D1 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		B032EF082ADBFF6900A675D1 /* RootViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewModel.swift; sourceTree = "<group>"; };
+		B032EF0C2ADC290200A675D1 /* NetworkingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingTests.swift; sourceTree = "<group>"; };
+		B032EF142ADC3B6B00A675D1 /* AlertHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHandler.swift; sourceTree = "<group>"; };
+		B032EF192ADC3E0800A675D1 /* FailedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailedView.swift; sourceTree = "<group>"; };
 		B036DC062AD9896A00F13A73 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		B036DC0E2AD989A200F13A73 /* NetworkingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingError.swift; sourceTree = "<group>"; };
 		B036DC112AD989BC00F13A73 /* CustomAlertProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertProtocol.swift; sourceTree = "<group>"; };
@@ -112,9 +118,18 @@
 			path = Root;
 			sourceTree = "<group>";
 		};
+		B032EF0E2ADC3AF400A675D1 /* AlertHandler */ = {
+			isa = PBXGroup;
+			children = (
+				B032EF142ADC3B6B00A675D1 /* AlertHandler.swift */,
+			);
+			path = AlertHandler;
+			sourceTree = "<group>";
+		};
 		B036DC052AD9895C00F13A73 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				B032EF0E2ADC3AF400A675D1 /* AlertHandler */,
 				B036DC0D2AD9899300F13A73 /* Networking */,
 				B036DC102AD989AE00F13A73 /* Protocols */,
 				B032EEFF2ADBBB9100A675D1 /* CacheManager.swift */,
@@ -148,6 +163,7 @@
 			children = (
 				B036DC1C2AD98BAF00F13A73 /* HomeView.swift */,
 				B036DC172AD98AE400F13A73 /* HomeViewModel.swift */,
+				B032EF192ADC3E0800A675D1 /* FailedView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -218,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				B0999C202AD96C92009CC854 /* Gratitude_AssignmentTests.swift */,
+				B032EF0C2ADC290200A675D1 /* NetworkingTests.swift */,
 			);
 			path = "Gratitude AssignmentTests";
 			sourceTree = "<group>";
@@ -376,7 +393,9 @@
 				B036DC212AD98E7F00F13A73 /* DailyZenService.swift in Sources */,
 				B032EF002ADBBB9100A675D1 /* CacheManager.swift in Sources */,
 				B032EEFE2ADBBB7E00A675D1 /* ImageLoaderViewModel.swift in Sources */,
+				B032EF1A2ADC3E0800A675D1 /* FailedView.swift in Sources */,
 				B0999C102AD96C90009CC854 /* Gratitude_AssignmentApp.swift in Sources */,
+				B032EF152ADC3B6B00A675D1 /* AlertHandler.swift in Sources */,
 				B032EF092ADBFF6900A675D1 /* RootViewModel.swift in Sources */,
 				B036DC1B2AD98B8600F13A73 /* DailyZenModel.swift in Sources */,
 			);
@@ -387,6 +406,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0999C212AD96C92009CC854 /* Gratitude_AssignmentTests.swift in Sources */,
+				B032EF0D2ADC290200A675D1 /* NetworkingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

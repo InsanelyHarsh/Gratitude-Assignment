@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 
+/// CacheManager
+/// - Handles Caching of Images
 class CacheManager{
     
     static let instance = CacheManager()

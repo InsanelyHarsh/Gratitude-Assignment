@@ -7,13 +7,26 @@
 
 import Foundation
 
-public enum NetworkingError:Error,CustomErrorAlertProtocol{
+protocol NetworkError:Error{
+    var errorDescription:String{ get }
+}
+
+public enum NetworkingError:NetworkError{
     case badURL
     case badResponse(response:String)
     case decodingFailed
     case unknownError
     
     case encodingFailed
+    
+    var errorDescription: String{
+        get{
+            return ""
+        }
+    }
+}
+
+extension NetworkingError:CustomErrorAlertProtocol{
     
     public var alertTitle:String{
         switch self {
