@@ -14,15 +14,13 @@ struct CardModel{
     let title:String
     let auther:String
     let text:String
-
+    
+//    let themeTitle:String
+    
     let imageURL:String
     
     let primayCTAText:String
     let sharePrefix:String
-}
-
-struct CardImage{
-    let imageURL:String
 }
 
 /*

@@ -27,7 +27,7 @@ struct ImageLoaderView: View {
                     .onTapGesture {
                         Task{
                             await self.loader.getImage()
-                            Logger.logMessage("Re Loading Image...")
+                            Logger.logMessage("Re-Loading Image...")
                         }
                     }
             }else if let image = loader.image{

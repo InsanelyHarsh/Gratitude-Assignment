@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import SwiftUI
+
 public protocol CustomErrorAlertProtocol{
     var alertTitle:String{
         get
@@ -13,5 +15,23 @@ public protocol CustomErrorAlertProtocol{
     
     var alertDescription:String{
         get
+    }
+}
+
+extension Color{
+    static var homeBG:Color{
+        Color("home-bg-color")
+    }
+    
+    static var cardHeaderFont:Color{
+        Color("card-header-font-color")
+    }
+    
+    static var cardBG:Color{
+        Color("card-bg-color")
+    }
+    
+    static var clipBoardBG:Color{
+        Color("clipBoard-BG")
     }
 }

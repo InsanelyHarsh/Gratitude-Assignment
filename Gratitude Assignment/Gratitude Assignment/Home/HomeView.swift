@@ -24,17 +24,19 @@ struct HomeView: View {
     @StateObject var homeVM:HomeViewModel = HomeViewModel()
     var body: some View {
         NavigationStack {
-            VStack{
+            ZStack{
+                Color.homeBG
+                
                 if(homeVM.isLoading){
                     ProgressView("Take a deep Breath")
                         .tint(.blue)
                 }else{
+                    
                     ZStack(alignment:.top){
                         ScrollView(showsIndicators: false){
-                            VStack(spacing: 5) {
+                            VStack(spacing: 20) {
                                 ForEach(homeVM.zenCards,id:\.uniqueID){ zenCard in
                                     DailyZenCardView(cardContent: zenCard)
-                                    Divider()
                                 }
                             }.padding(.top,5)
                         }
@@ -75,7 +77,7 @@ struct HomeView: View {
             .task{
                 await self.homeVM.getDailyZenCard()
             }
-            .navigationTitle("Gratitute")
+            .navigationTitle(homeVM.currentDate.getDateDescription)
             .navigationBarTitleDisplayMode(.inline)
             
             .toolbar {

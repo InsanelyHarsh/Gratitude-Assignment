@@ -106,7 +106,7 @@ extension HomeViewModel{
             self.isNextButtonDisabled = false
             self.isPrevButtonDisabled = false
         }
-        return dayGap > 0 && dayGap <= 7
+        return dayGap >= 0 && dayGap <= 7
     }
     
     private func daysBetween(startDate: Date, endDate: Date) -> Int {
@@ -135,6 +135,8 @@ extension HomeViewModel{
         }
         self.datesArray = datesArray
     }
+    
+    
 }
 
 extension Date{
@@ -147,6 +149,14 @@ extension Date{
     var getMonth:String{
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM"
+        return formatter.string(from: self)
+    }
+    
+    var getDateDescription:String{
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMM d"
+        let date = Date.now.formatted(date: .numeric, time: .omitted)
+        if(date == self.formatted(date: .numeric, time: .omitted)){ return "TODAY" }
         return formatter.string(from: self)
     }
 }

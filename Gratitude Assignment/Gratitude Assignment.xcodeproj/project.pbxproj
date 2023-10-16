@@ -33,6 +33,8 @@
 		B0999C212AD96C92009CC854 /* Gratitude_AssignmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0999C202AD96C92009CC854 /* Gratitude_AssignmentTests.swift */; };
 		B0999C2B2AD96C92009CC854 /* Gratitude_AssignmentUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0999C2A2AD96C92009CC854 /* Gratitude_AssignmentUITests.swift */; };
 		B0999C2D2AD96C92009CC854 /* Gratitude_AssignmentUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0999C2C2AD96C92009CC854 /* Gratitude_AssignmentUITestsLaunchTests.swift */; };
+		B0F8FBF12ADCB6510034AEBD /* SharePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F8FBF02ADCB6510034AEBD /* SharePreviewView.swift */; };
+		B0F8FBF32ADCC0740034AEBD /* SharePreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F8FBF22ADCC0740034AEBD /* SharePreviewViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +84,8 @@
 		B0999C262AD96C92009CC854 /* Gratitude AssignmentUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Gratitude AssignmentUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0999C2A2AD96C92009CC854 /* Gratitude_AssignmentUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gratitude_AssignmentUITests.swift; sourceTree = "<group>"; };
 		B0999C2C2AD96C92009CC854 /* Gratitude_AssignmentUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gratitude_AssignmentUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B0F8FBF02ADCB6510034AEBD /* SharePreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePreviewView.swift; sourceTree = "<group>"; };
+		B0F8FBF22ADCC0740034AEBD /* SharePreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePreviewViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +218,7 @@
 				B032EF032ADBFF3C00A675D1 /* Root */,
 				B036DC162AD98AD500F13A73 /* Home */,
 				B036DC252AD9957C00F13A73 /* DailyZenCard */,
+				B0F8FBED2ADCB5F50034AEBD /* SharePreview */,
 				B036DC052AD9895C00F13A73 /* Utility */,
 				B036DC192AD98B7B00F13A73 /* Models */,
 				B0999C132AD96C92009CC854 /* Assets.xcassets */,
@@ -246,6 +251,15 @@
 				B0999C2C2AD96C92009CC854 /* Gratitude_AssignmentUITestsLaunchTests.swift */,
 			);
 			path = "Gratitude AssignmentUITests";
+			sourceTree = "<group>";
+		};
+		B0F8FBED2ADCB5F50034AEBD /* SharePreview */ = {
+			isa = PBXGroup;
+			children = (
+				B0F8FBF02ADCB6510034AEBD /* SharePreviewView.swift */,
+				B0F8FBF22ADCC0740034AEBD /* SharePreviewViewModel.swift */,
+			);
+			path = SharePreview;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -382,6 +396,7 @@
 				B036DC122AD989BC00F13A73 /* CustomAlertProtocol.swift in Sources */,
 				B036DC152AD989F800F13A73 /* Logger.swift in Sources */,
 				B032EF072ADBFF5700A675D1 /* RootView.swift in Sources */,
+				B0F8FBF12ADCB6510034AEBD /* SharePreviewView.swift in Sources */,
 				B036DC182AD98AE400F13A73 /* HomeViewModel.swift in Sources */,
 				B036DC292AD99AEE00F13A73 /* CardModel.swift in Sources */,
 				B032EF022ADBFEBA00A675D1 /* Reachability.swift in Sources */,
@@ -398,6 +413,7 @@
 				B032EF152ADC3B6B00A675D1 /* AlertHandler.swift in Sources */,
 				B032EF092ADBFF6900A675D1 /* RootViewModel.swift in Sources */,
 				B036DC1B2AD98B8600F13A73 /* DailyZenModel.swift in Sources */,
+				B0F8FBF32ADCC0740034AEBD /* SharePreviewViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -560,6 +576,7 @@
 				DEVELOPMENT_TEAM = NF89CMS79F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Save Photos to Gallery";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -590,6 +607,7 @@
 				DEVELOPMENT_TEAM = NF89CMS79F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Save Photos to Gallery";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

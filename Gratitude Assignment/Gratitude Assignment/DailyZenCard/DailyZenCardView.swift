@@ -8,73 +8,64 @@
 import SwiftUI
 
 struct DailyZenCardView: View {
+    
     let cardContent:CardModel
-    @State private var renderedImg:Image?
     @State private var isBookmarked:Bool = false
+    @State private var presentSheet:Bool = false
     
     var body: some View {
         VStack(alignment:.leading,spacing: 10){
-
-            //MARK: Image
+            
+            Text(cardContent.title.uppercased())
+                .foregroundColor(.cardHeaderFont)
+                .padding(.vertical)
+            
+            //Card Image
             ImageLoaderView(urlString: cardContent.imageURL, cacheKey: cardContent.uniqueID, placeHolderImage: "placeholder-image")
             
-            //MARK: Content
-            VStack(alignment: .leading,spacing: 20){
-                VStack(alignment: .leading){
-                    Text(cardContent.title) //Theme Title
-                        .font(.headline)
-                        .bold()
-                    
-                    Text(cardContent.auther) //Auther
-                        .font(.subheadline)
-                }
-                
-                //Text
-                Text(cardContent.text)
-                    .font(.callout)
-            }
-            
-            //MARK: Footer
-            HStack{
-                //Share Button
-                ShareLink(Text(""),
-                          item: cardContent.sharePrefix,
-                          subject: Text(cardContent.title),
-                          message: Text(cardContent.primayCTAText),
-                          preview: SharePreview(Text(cardContent.primayCTAText), icon: Image(systemName: "gear.fill")))
-                .tint(.green)
-
-                
-                Image(systemName: isBookmarked ? "bookmark.fill" : "bookmark")
-                    .foregroundColor(.pink)
-                    .onTapGesture {
-                        withAnimation {
-                            self.isBookmarked.toggle()
-                        }
-                    }
-            }.frame(maxWidth: .infinity,alignment: .trailing)
-            
-            
-            /*
-             ShareLink(
-                       item: cardContent.sharePrefix,
-                       subject: Text(cardContent.title),
-                       message: Text(cardContent.primayCTAText)) {
-                 Image(systemName: "square.and.arrow.up")
-                     .tint(.green)
-             }
-             */
+            //Footer
+            self.footer
             Spacer()
         }
+        .sheet(isPresented: $presentSheet) {
+            SharePreviewView(shareImage: CacheManager.instance.get(key: cardContent.uniqueID), sharePrefix: cardContent.sharePrefix, primaryCTAText: cardContent.primayCTAText)
+                .presentationDetents([.fraction(0.8),.large])
+        }
+        .background{
+            Color.cardBG.cornerRadius(10)
+        }
         .padding(.horizontal)
+    }
+    
+    
+    //MARK: Footer
+    private var footer:some View{
+        HStack{
+            
+            Button {
+                self.presentSheet.toggle()
+            } label: {
+                Image(systemName: "square.and.arrow.up")
+            }
+
+
+            Image(systemName: "plus.circle")
+            
+            Image(systemName: isBookmarked ? "bookmark.circle.fill" : "bookmark.circle")
+                .foregroundColor(.pink)
+                .onTapGesture {
+                    withAnimation {
+                        self.isBookmarked.toggle()
+                    }
+                }
+        }.frame(maxWidth: .infinity,alignment: .leading)
     }
 }
 
 struct DailyZenCardView_Previews: PreviewProvider {
 
     static var previews: some View {
-        DailyZenCardView(cardContent: CardModel(uniqueID: "",
-                                                title: "Quote of the Day",
+        DailyZenCardView(cardContent: CardModel(uniqueID: "", title: "JSO",
                                                 auther: "Rebecca Wells", text: "Life is short, but it is wide. This too shall pass.",
                                                 imageURL: "https://d3ez3n6m1z7158.cloudfront.net/exp/story_976.png",
                                                 primayCTAText: "Add Affirmation",
