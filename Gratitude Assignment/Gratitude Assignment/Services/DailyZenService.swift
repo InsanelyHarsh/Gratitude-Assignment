@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+///
 struct DailyZenService{
     private var currentDate:String = ""
     private let networkingService:NetworkingService
@@ -33,16 +34,6 @@ struct DailyZenService{
                       primayCTAText: $0.primaryCTAText,
                       sharePrefix: $0.sharePrefix)
         }
-    }
-
-    func getImageFrom(url:String)async -> UIImage?{
-        do{
-            let imageData = try await self.networkingService.downloadDataFrom(url: url)
-            return UIImage(data: imageData)
-        }catch(_){
-            
-        }
-        return nil
     }
     
     ///Converts Date into yyyMMdd

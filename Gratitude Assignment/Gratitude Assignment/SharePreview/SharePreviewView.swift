@@ -189,14 +189,3 @@ struct SharePreviewView_Previews: PreviewProvider {
                                                 )
     }
 }
-
-/*
- /*
-                  ShareLink(Text(""),
-                            item: Image("card-test-image"),
-                            subject: Text(cardContent.title),
-                            message: Text(cardContent.primayCTAText),
-                            preview: SharePreview(Text(cardContent.primayCTAText), icon: Image("placeholder-image")))
-                  .tint(.green)
-  */
- */

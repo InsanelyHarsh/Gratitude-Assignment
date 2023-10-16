@@ -14,35 +14,40 @@ struct RootView: View {
             if(rootVM.isNetworkConnectionAvailable){
                 HomeView()
             }else{
-                VStack{
-                    Image(systemName: "wifi.exclamationmark")
-                        .tint(.pink)
-                    
-                    Text("Offline!")
-                        .font(.largeTitle)
-                        .bold()
-                        .foregroundColor(.red)
-                    
-                    HStack{
-                        
-                        Button {
-                            //TODO: Present data from core-data
-                        } label: {
-                            Text("Go Offline")
-                        }
-                        .buttonStyle(.borderedProminent)
-                        .tint(.orange)
-                        
-                        Button {
-                            self.rootVM.checkConnection()
-                        } label: {
-                            Text("Try Again!")
-                        }.buttonStyle(.borderedProminent)
-                    }
-                }
+                offlineView
             }
         }.onAppear{
             self.rootVM.checkConnection()
+        }
+    }
+    
+    
+    private var offlineView:some View{
+        VStack{
+            Image(systemName: "wifi.exclamationmark")
+                .tint(.pink)
+            
+            Text("Offline!")
+                .font(.largeTitle)
+                .bold()
+                .foregroundColor(.red)
+            
+            HStack{
+                
+                Button {
+                    //TODO: Present data from core-data
+                } label: {
+                    Text("Go Offline")
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(.orange)
+                
+                Button {
+                    self.rootVM.checkConnection()
+                } label: {
+                    Text("Try Again!")
+                }.buttonStyle(.borderedProminent)
+            }
         }
     }
 }

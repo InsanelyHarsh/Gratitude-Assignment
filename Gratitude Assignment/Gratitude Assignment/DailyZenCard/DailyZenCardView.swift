@@ -42,19 +42,21 @@ struct DailyZenCardView: View {
     private var footer:some View{
         HStack{
             
-//            if(cardContent.articleURL.isEmpty == true){
-//                Button {
-//                    if let url = URL(string:cardContent.articleURL){
-//                        UIApplication.shared.open(url)
-//                    }
-//                } label: {
-//                    HStack{
-//                        Image(systemName: "newspaper")
-//                        Text("Read Full Post")
-//                    }
-//                }
-//                .padding()
-//            }
+            if(cardContent.articleURL.isEmpty == false){
+                Button {
+                    if let url = URL(string:cardContent.articleURL){
+                        UIApplication.shared.open(url)
+                    }
+                } label: {
+                    HStack{
+                        Image(systemName: "newspaper")
+                        Text("Read Full Post")
+                            .font(.caption)
+                    }
+                }
+                .tint(.black)
+                .padding()
+            }
             
             Button {
                 self.presentSheet.toggle()
@@ -72,7 +74,9 @@ struct DailyZenCardView: View {
                         self.isBookmarked.toggle()
                     }
                 }
-        }.frame(maxWidth: .infinity,alignment: .leading)
+        }
+        .frame(maxWidth: .infinity,alignment: .leading)
+        .padding(.leading,5)
     }
 }
 

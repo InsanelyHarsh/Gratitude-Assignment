@@ -7,31 +7,18 @@
 
 import SwiftUI
 
-/*
- * Share Functionalities (^)
- * Refactor UI (^)
- * Alerts (X)
- * Core Data Integration (-)
- 
- - Loading Page Animation (^)
- - Disable, Enable Prev/Next Buttons (^)
- - Load Images Concurrently (^)
- - Cache Images, Default Image & Reload Image (^)
- 
- ~ Network Availibility, Unit Tests (XX)
- */
 struct HomeView: View {
     @StateObject var homeVM:HomeViewModel = HomeViewModel()
     var body: some View {
         NavigationStack {
             ZStack{
-                Color.homeBG
+                Color.homeBG //Background Color
                 
                 if(homeVM.isLoading){
                     ProgressView("Take a deep Breath")
                         .tint(.blue)
                 }else{
-                    
+                    //Cards
                     ZStack(alignment:.top){
                         ScrollView(showsIndicators: false){
                             VStack(spacing: 20) {
@@ -42,35 +29,13 @@ struct HomeView: View {
                         }
                         .offset(y: 100)
                         
-                        ZStack{
-                            ScrollViewReader { scrollProxy in
-                                ScrollView(.horizontal, showsIndicators: false){
-                                    HStack{
-                                        ForEach(homeVM.datesArray,id:\.self){ date in
-                                            VStack{
-                                                Text(date.getDay)
-                                                Text(date.getMonth)
-                                            }
-                                            .id(date.description)
-                                            .padding()
-                                            .background{
-                                                Circle().opacity(0.1)
-                                                    .foregroundColor(homeVM.currentDate.formatted(date: .numeric, time: .omitted) == date.formatted(date: .numeric, time: .omitted) ? .pink : .black)
-                                            }
-                                        }
-                                    }
-                                }
-                                .frame(height: 100)
-                                .onAppear{
-                                    scrollProxy.scrollTo(homeVM.currentDate)
-                                }
-                            }
-                        }
+                        //Horizontal Calendar
+                        horizontalCalendar
                     }
                 }
             }
             .alert(homeVM.alert.title, isPresented: $homeVM.showAlert, actions: {
-//                homeVM.alert.action()
+
             }, message: {
                 Text(homeVM.alert.description)
             })
@@ -109,6 +74,34 @@ struct HomeView: View {
                     }
                     .disabled(self.homeVM.isNextButtonDisabled)
                     .tint(.pink)
+                }
+            }
+        }
+    }
+    
+    private var horizontalCalendar:some View{
+        ZStack{
+            ScrollViewReader { scrollProxy in
+                ScrollView(.horizontal, showsIndicators: false){
+                    HStack{
+                        ForEach(homeVM.datesArray,id:\.self){ date in
+                            VStack{
+                                Text(date.getDay)
+                                Text(date.getMonth)
+                            }
+                            .id(date.description)
+                            .padding()
+                            .background{
+                                Circle()
+                                    .opacity(0.1)
+                                    .foregroundColor(homeVM.currentDate.formatted(date: .numeric, time: .omitted) == date.formatted(date: .numeric, time: .omitted) ? .pink : .black) //TODO: improve
+                            }
+                        }
+                    }
+                }
+                .frame(height: 100)
+                .onAppear{
+                    scrollProxy.scrollTo(homeVM.currentDate)
                 }
             }
         }
