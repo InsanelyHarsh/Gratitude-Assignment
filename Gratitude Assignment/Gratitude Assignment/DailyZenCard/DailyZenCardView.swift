@@ -42,6 +42,20 @@ struct DailyZenCardView: View {
     private var footer:some View{
         HStack{
             
+//            if(cardContent.articleURL.isEmpty == true){
+//                Button {
+//                    if let url = URL(string:cardContent.articleURL){
+//                        UIApplication.shared.open(url)
+//                    }
+//                } label: {
+//                    HStack{
+//                        Image(systemName: "newspaper")
+//                        Text("Read Full Post")
+//                    }
+//                }
+//                .padding()
+//            }
+            
             Button {
                 self.presentSheet.toggle()
             } label: {
@@ -62,14 +76,14 @@ struct DailyZenCardView: View {
     }
 }
 
-struct DailyZenCardView_Previews: PreviewProvider {
-
-    static var previews: some View {
-        DailyZenCardView(cardContent: CardModel(uniqueID: "", title: "JSO",
-                                                auther: "Rebecca Wells", text: "Life is short, but it is wide. This too shall pass.",
-                                                imageURL: "https://d3ez3n6m1z7158.cloudfront.net/exp/story_976.png",
-                                                primayCTAText: "Add Affirmation",
-                                                sharePrefix: "Here's a lovely affirmation from my Gratitude app 🌻 https://gratefulness.page.link/3T7N")
-                                                )
-    }
-}
+//struct DailyZenCardView_Previews: PreviewProvider {
+//
+//    static var previews: some View {
+//        DailyZenCardView(cardContent: CardModel(uniqueID: "", title: "JSO",
+//                                                auther: "Rebecca Wells", text: "Life is short, but it is wide. This too shall pass.", articleURL: "",
+//                                                imageURL: "https://d3ez3n6m1z7158.cloudfront.net/exp/story_976.png",
+//                                                primayCTAText: "Add Affirmation",
+//                                                sharePrefix: "Here's a lovely affirmation from my Gratitude app 🌻 https://gratefulness.page.link/3T7N")
+//                                                )
+//    }
+//}

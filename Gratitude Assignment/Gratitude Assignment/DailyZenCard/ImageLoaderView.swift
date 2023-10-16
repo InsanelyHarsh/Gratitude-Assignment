@@ -42,17 +42,17 @@ struct ImageLoaderView: View {
     }
 }
 
-struct ImageLoaderView_Previews: PreviewProvider {
-    static var previews: some View {
-//        ImageLoaderView()
-        DailyZenCardView(cardContent: CardModel(uniqueID: "",
-                                                title: "Quote of the Day",
-                                                auther: "Rebecca Wells", text: "Life is short, but it is wide. This too shall pass.",
-                                                imageURL: "https://d3ez3n6m1z7158.cloudfront.net/exp/story_976.png",
-                                                primayCTAText: "Add Affirmation",
-                                                sharePrefix: "Here's a lovely affirmation from my Gratitude app 🌻 https://gratefulness.page.link/3T7N")
-                                                )
-    }
-}
+//struct ImageLoaderView_Previews: PreviewProvider {
+//    static var previews: some View {
+////        ImageLoaderView()
+//        DailyZenCardView(cardContent: CardModel(uniqueID: "",
+//                                                title: "Quote of the Day",
+//                                                auther: "Rebecca Wells", text: "Life is short, but it is wide. This too shall pass.",
+//                                                imageURL: "https://d3ez3n6m1z7158.cloudfront.net/exp/story_976.png",
+//                                                primayCTAText: "Add Affirmation",
+//                                                sharePrefix: "Here's a lovely affirmation from my Gratitude app 🌻 https://gratefulness.page.link/3T7N")
+//                                                )
+//    }
+//}
 
 

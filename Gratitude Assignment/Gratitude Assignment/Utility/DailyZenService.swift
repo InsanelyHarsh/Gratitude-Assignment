@@ -28,7 +28,7 @@ struct DailyZenService{
                       title: $0.themeTitle,
                       auther: $0.author,
                       text: $0.text,
-//                      themeTitle: $0.themeTitle,
+                      articleURL: $0.articleURL,
                       imageURL: $0.dzImageURL,
                       primayCTAText: $0.primaryCTAText,
                       sharePrefix: $0.sharePrefix)

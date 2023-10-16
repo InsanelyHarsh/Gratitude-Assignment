@@ -15,8 +15,7 @@ struct CardModel{
     let auther:String
     let text:String
     
-//    let themeTitle:String
-    
+    let articleURL:String
     let imageURL:String
     
     let primayCTAText:String
